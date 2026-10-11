@@ -98,7 +98,9 @@ const updateDevice = (list, id, updateData) => {
 
   fields.forEach((field) => {
     const value = updateData[field];
-    targetDevice[field] = typeof value === "string" ? value.trim() : value;
+    if (value !== undefined) {
+      targetDevice[field] = typeof value === "string" ? value.trim() : value;
+    }
   });
 
   return true;
@@ -142,6 +144,7 @@ if (typeof module !== "undefined" && require.main === module) {
 if (typeof module !== "undefined") {
   module.exports = {
     createDevice,
+    readDevices: readDevicesByRoom,
     readDevicesByRoom,
     updateDevice,
     deleteDevice,
